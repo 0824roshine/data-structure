@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<malloc.h>
-// Èç¹ûÒ»Ö±addtail£¬ÄÇ¾Í»áÃ¿´Î¶¼±éÀúÒ»±é£¬addtail n´Î¾Í»á»¨ n(n+1)/2 µÄÊ±¼ä
+// å¦‚æœä¸€ç›´addtailï¼Œé‚£å°±ä¼šæ¯æ¬¡éƒ½éå†ä¸€éï¼Œaddtail næ¬¡å°±ä¼šèŠ± n(n+1)/2 çš„æ—¶é—´
 typedef struct MyNode {
     int num;
     struct MyNode* next;
@@ -13,46 +13,46 @@ typedef struct MyList {
 }MyLinkedList;
 MyLinkedList* myLinkedListCreate() {
     MyLinkedList* L = (MyLinkedList*)malloc(sizeof(MyLinkedList));
-    L->count = -1;              // count ³õÊ¼ÒªÎª¸ºÒ»£¬ÒòÎªµÚÒ»¸ö½ÚµãµÄindexÊÇÁã£¬ÕâÑù²ÅÄÜ¶ÔÓ¦
-    L->head = NULL;             //´´½¨Ò»¸öÍ·²¿£¬ÆäÖĞÓĞÁ½¸öÖ¸Õë£¬Ò»¸öÓÃÓÚÖ¸ÏòµÚÒ»¸ö½Úµã£¬Ò»¸öÓÃÓÚÖ¸Ïò×îºóÒ»¸ö
+    L->count = -1;              // count åˆå§‹è¦ä¸ºè´Ÿä¸€ï¼Œå› ä¸ºç¬¬ä¸€ä¸ªèŠ‚ç‚¹çš„indexæ˜¯é›¶ï¼Œè¿™æ ·æ‰èƒ½å¯¹åº”
+    L->head = NULL;             //åˆ›å»ºä¸€ä¸ªå¤´éƒ¨ï¼Œå…¶ä¸­æœ‰ä¸¤ä¸ªæŒ‡é’ˆï¼Œä¸€ä¸ªç”¨äºæŒ‡å‘ç¬¬ä¸€ä¸ªèŠ‚ç‚¹ï¼Œä¸€ä¸ªç”¨äºæŒ‡å‘æœ€åä¸€ä¸ª
     L->tail = NULL;
     return L;
 }
 void addWhileEmpty(MyLinkedList* obj, int val) {
     MyNode* newnode = (MyNode*)malloc(sizeof(MyNode));
-    newnode->num = val;                //Ïò¿ÕÁ´±íÀï¼ÓÔªËØ£¬ÎŞÂÛÊÇaddHead»¹ÊÇaddTail£¬¿ÕµÄÊ±ºò¶¼Ò»Ñù¡£
+    newnode->num = val;                //å‘ç©ºé“¾è¡¨é‡ŒåŠ å…ƒç´ ï¼Œæ— è®ºæ˜¯addHeadè¿˜æ˜¯addTailï¼Œç©ºçš„æ—¶å€™éƒ½ä¸€æ ·ã€‚
     newnode->next = NULL;
     obj->head = newnode;
-    obj->tail = newnode;           //head tailÒ»Ñù
+    obj->tail = newnode;           //head tailä¸€æ ·
 }
 void myLinkedListAddAtHead(MyLinkedList* obj, int val) {
     if (obj->head == NULL) {
-        addWhileEmpty(obj, val);        //Ïò¿ÕÁ´¼Ó£¬
+        addWhileEmpty(obj, val);        //å‘ç©ºé“¾åŠ ï¼Œ
     }
     else {
         MyNode* newnode = (MyNode*)malloc(sizeof(MyNode));
         newnode->num = val;
         newnode->next = obj->head;
-        obj->head = newnode;            //´ÓÍ·¼Ó²»ĞèÒªµ÷ÕûtailÖ¸Õë¡£
+        obj->head = newnode;            //ä»å¤´åŠ ä¸éœ€è¦è°ƒæ•´tailæŒ‡é’ˆã€‚
     }
     obj->count++;
 }
 void myLinkedListAddAtTail(MyLinkedList* obj, int val) {  
     if (obj->head == NULL) {
-        addWhileEmpty(obj, val);        //Ïò¿ÕÁ´¼Ó£¬
+        addWhileEmpty(obj, val);        //å‘ç©ºé“¾åŠ ï¼Œ
     }
     else {
         MyNode* newnode = (MyNode*)malloc(sizeof(MyNode));
         newnode->num = val;
         newnode->next = NULL;
-        MyNode* tmp = obj->tail;        //ÕâÊ±ºò°ÑtailÖ¸ÏòµÄ×îºóÒ»¸ö½ÚµãµÄÎ»ÖÃÄÃ³öÀ´£¬
-        tmp->next = newnode;            //ËüµÄnextÖ¸ÏòĞÂ½Úµã£¬¾Í²»ÓÃ±éÀúÁË¡£
-        obj->tail = newnode;            //ÈÃtailÖ¸ÏòĞÂµÄÎ²½Úµã¡£
+        MyNode* tmp = obj->tail;        //è¿™æ—¶å€™æŠŠtailæŒ‡å‘çš„æœ€åä¸€ä¸ªèŠ‚ç‚¹çš„ä½ç½®æ‹¿å‡ºæ¥ï¼Œ
+        tmp->next = newnode;            //å®ƒçš„nextæŒ‡å‘æ–°èŠ‚ç‚¹ï¼Œå°±ä¸ç”¨éå†äº†ã€‚
+        obj->tail = newnode;            //è®©tailæŒ‡å‘æ–°çš„å°¾èŠ‚ç‚¹ã€‚
     }obj->count++;
 }
 MyNode* goToIndex(MyLinkedList* obj, int index) {
-    MyNode* pos = obj->head;            //ÎŞÂÛÊÇget£¬delete add_at ¶¼ĞèÒªÌøµ½ÖĞ¼äµÄÄ³¸ö½Úµã¡£
-    int i = 0;                          // ÕâĞ©ÖØ¸´µÄ²¿·Ö¾ÍÓÃ¸öº¯Êı½â¾ö¡£
+    MyNode* pos = obj->head;            //æ— è®ºæ˜¯getï¼Œdelete add_at éƒ½éœ€è¦è·³åˆ°ä¸­é—´çš„æŸä¸ªèŠ‚ç‚¹ã€‚
+    int i = 0;                          // è¿™äº›é‡å¤çš„éƒ¨åˆ†å°±ç”¨ä¸ªå‡½æ•°è§£å†³ã€‚
     while (i < index) {
         pos = pos->next;
         i++;
@@ -60,46 +60,46 @@ MyNode* goToIndex(MyLinkedList* obj, int index) {
     return pos;
 }
 int myLinkedListGet(MyLinkedList* obj, int index) {
-    if (index > obj->count || index < 0)        //indexÒªÈ¡ÔÚlinklistµÄ³¤¶È·¶Î§ÄÚ
+    if (index > obj->count || index < 0)        //indexè¦å–åœ¨linklistçš„é•¿åº¦èŒƒå›´å†…
         return -1;
-    MyNode* tmp = goToIndex(obj, index);        //getË­¾ÍÈ¥Ë­µÄÎ»ÖÃ¡£
+    MyNode* tmp = goToIndex(obj, index);        //getè°å°±å»è°çš„ä½ç½®ã€‚
     return tmp->num;
 }
 void myLinkedListAddAtIndex(MyLinkedList* obj, int index, int val) {
-    if (index > obj->count + 1)                    //ÌâÄ¿ÖĞÊÇÔÚ --µÚindex¸ö-- ½Úµã¡¶Ö®Ç°¡·¼Ó½Úµã£¬ËùÒÔÓÒ±ß½çÊÇcount+1  
+    if (index > obj->count + 1)                    //é¢˜ç›®ä¸­æ˜¯åœ¨ --ç¬¬indexä¸ª-- èŠ‚ç‚¹ã€Šä¹‹å‰ã€‹åŠ èŠ‚ç‚¹ï¼Œæ‰€ä»¥å³è¾¹ç•Œæ˜¯count+1  
         return;                                                 
-    else if (index <= 0)                        //ÌâÄ¿¹æ¶¨index·ÇÕı£¬¾Í¼ÓÍ·²¿
+    else if (index <= 0)                        //é¢˜ç›®è§„å®šindexéæ­£ï¼Œå°±åŠ å¤´éƒ¨
         myLinkedListAddAtHead(obj, val);
-    else if (index == obj->count + 1)           //ÔÚcount+1¸öÖ®Ç°¼Ó£¬¾ÍµÈÓÚÔÚÄ©Î²¼Ó¡£
+    else if (index == obj->count + 1)           //åœ¨count+1ä¸ªä¹‹å‰åŠ ï¼Œå°±ç­‰äºåœ¨æœ«å°¾åŠ ã€‚
         myLinkedListAddAtTail(obj, val);
     else {
-        MyNode* newnode = (MyNode*)malloc(sizeof(MyNode));//·ñÔò¾ÍÔÚÖĞ¼ä¼Ó¿©
+        MyNode* newnode = (MyNode*)malloc(sizeof(MyNode));//å¦åˆ™å°±åœ¨ä¸­é—´åŠ å’¯
         newnode->num = val;
         newnode->next = NULL;
-        MyNode* tmp = goToIndex(obj, index - 1);        //È¥ indexÖ®Ç°µÄÄÇ¸ö½Úµã²ÅÄÜ²åÈë
+        MyNode* tmp = goToIndex(obj, index - 1);        //å» indexä¹‹å‰çš„é‚£ä¸ªèŠ‚ç‚¹æ‰èƒ½æ’å…¥
         newnode->next = tmp->next;
         tmp->next = newnode;
         obj->count++;
     }
 }
 void myLinkedListDeleteAtIndex(MyLinkedList* obj, int index) {
-    if (index > obj->count || index < 0)        //±ß½çÇé¿ö¡£
+    if (index > obj->count || index < 0)        //è¾¹ç•Œæƒ…å†µã€‚
         return;
-    MyNode* tmp = NULL;                     //Ö»ÓĞÉ¾Î²£¬»á¸Ä±ätail½ÚµãµÄÎ»ÖÃ¡£
+    MyNode* tmp = NULL;                     //åªæœ‰åˆ å°¾ï¼Œä¼šæ”¹å˜tailèŠ‚ç‚¹çš„ä½ç½®ã€‚
     MyNode* p = NULL;
-    if (index == 0) {                           //É¾Í·£¬ĞèÒª¸ÄheadÖ¸ÏòµÄ½Úµã¡£
-        tmp = obj->head;                        //µ±Á´±í¾ÍÒ»¸ö½ÚµãµÄÊ±ºò£¬Í·¾ÍÊÇÎ²¡£
-        obj->head = tmp->next;                  //É¾ÁËºó£¬tail½ÚµãĞèÒª¸Ä³ÉNULL£¬µ«Õâ¸ö·ÅÔÚ×îºó¸Ä
+    if (index == 0) {                           //åˆ å¤´ï¼Œéœ€è¦æ”¹headæŒ‡å‘çš„èŠ‚ç‚¹ã€‚
+        tmp = obj->head;                        //å½“é“¾è¡¨å°±ä¸€ä¸ªèŠ‚ç‚¹çš„æ—¶å€™ï¼Œå¤´å°±æ˜¯å°¾ã€‚
+        obj->head = tmp->next;                  //åˆ äº†åï¼ŒtailèŠ‚ç‚¹éœ€è¦æ”¹æˆNULLï¼Œä½†è¿™ä¸ªæ”¾åœ¨æœ€åæ”¹
     }
-    else {                                      //²»ÔÚÍ·²¿£¬Ê±£¬È¥µÚindex¸ö½ÚµãÖ®Ç°µÄ½Úµã¡£
+    else {                                      //ä¸åœ¨å¤´éƒ¨ï¼Œæ—¶ï¼Œå»ç¬¬indexä¸ªèŠ‚ç‚¹ä¹‹å‰çš„èŠ‚ç‚¹ã€‚
         p = goToIndex(obj, index - 1);          
         tmp = p->next;
         p->next = tmp->next;                    //
     }
-    free(tmp);                                  //É¾ÁËºóÒªfreeµômallocµÄ¿Õ¼ä
+    free(tmp);                                  //åˆ äº†åè¦freeæ‰mallocçš„ç©ºé—´
     obj->count--;
-    if (index == (obj->count) + 1) {            // ÅĞ¶ÏÉ¾µÄµØ·½ÊÇ·ñÔÚÎ²²¿¡£ÒòÎªÕâÊ±ºòcount¼õÒ»ÁË£¬ËùÒÔ¼Ó»ØÈ¥Ò»ÏÂ
-        obj->tail = p;                      //°ÑÎ²½Úµã¸Ä³É, ĞÂµÄ£¬×îºóÒ»¸ö½Úµã£¬Ò²¾ÍÊÇindex-1µÄÄÇ¸ö½Úµã¡£Õâ¸öÎÒÃÇÒÑÇó¹ıÁË
+    if (index == (obj->count) + 1) {            // åˆ¤æ–­åˆ çš„åœ°æ–¹æ˜¯å¦åœ¨å°¾éƒ¨ã€‚å› ä¸ºè¿™æ—¶å€™countå‡ä¸€äº†ï¼Œæ‰€ä»¥åŠ å›å»ä¸€ä¸‹
+        obj->tail = p;                      //æŠŠå°¾èŠ‚ç‚¹æ”¹æˆ, æ–°çš„ï¼Œæœ€åä¸€ä¸ªèŠ‚ç‚¹ï¼Œä¹Ÿå°±æ˜¯index-1çš„é‚£ä¸ªèŠ‚ç‚¹ã€‚è¿™ä¸ªæˆ‘ä»¬å·²æ±‚è¿‡äº†
     }
 }
 void myLinkedListFree(MyLinkedList* obj) {      //free
